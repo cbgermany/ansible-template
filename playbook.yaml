@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: yes
+
+  vars_filea:
+  - vars.yml
+
+  handlers:
+    - name: restart <service>
+      service: name=<service> state=restarted
+
+  pre_tasks:
+    - name: <enter details hear>
+
+  tasks:
+    - name: <enter details hear>
+
+  post_tasks:
+    - name: <enter details hear>
