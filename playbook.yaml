@@ -15,5 +15,22 @@
   tasks:
     - name: <enter details hear>
 
+    - name: Amend contents of file x and set up parameter y
+      lineinfile:
+        dest: "source file x"
+        regexp: "^python style regex"
+        line: "line to become"
+        state: present
+        notify: restart <service>
+
+    - name: Amend contents of file with template
+      template:
+        src: "templates/templatefile.j2"
+        dest: "some destintion"
+        owner: <some user>
+        group: <some group>
+        mode: 0644
+        notify: restart <service>
+
   post_tasks:
     - name: <enter details hear>
