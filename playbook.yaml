@@ -12,8 +12,28 @@
   pre_tasks:
     - name: <enter details hear>
 
+# Below are some typical ansible tasks that would be included in a playbook delete or amend as appropriate
   tasks:
     - name: <enter details hear>
+
+    - name: Ensure that a Directory exists
+      file:
+        path: "path to file"
+        state: directory
+        owner: <some user>
+        group: <some group>
+
+    - name: Check if a file exists
+      stat:
+        path: "path to file"
+      register: file_state
+
+    - name: Run a command if the file does not exist
+      command: >
+        some command here
+        chdir=/tmp
+        creates="path to file"
+      when: not file_state.stat.exists
 
     - name: Amend contents of file x and set up parameter y
       lineinfile:
