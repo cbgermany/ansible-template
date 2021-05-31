@@ -6,8 +6,11 @@
   - vars.yml
 
   handlers:
-    - name: restart <service>
-      service: name=<service> state=restarted
+    - name: restart "services"
+      service: name="{{ item }} state=restarted enabled=yes"
+      with_items:
+        - service1
+        - service2
 
   pre_tasks:
     - name: <enter details hear>
@@ -41,7 +44,7 @@
         regexp: "^python style regex"
         line: "line to become"
         state: present
-        notify: restart <service>
+        notify: restart service1
 
     - name: Amend contents of file with template
       template:
@@ -50,7 +53,7 @@
         owner: <some user>
         group: <some group>
         mode: 0644
-        notify: restart <service>
+        notify: restart service2
 
   post_tasks:
     - name: <enter details hear>
