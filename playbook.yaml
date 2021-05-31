@@ -6,18 +6,19 @@
   - vars.yml
 
   handlers:
-    - name: restart "services"
-      service: name="{{ item }} state=restarted enabled=yes"
-      with_items:
-        - service1
-        - service2
+    - name: restart service1
+      service: name=service1 state=restarted
 
   pre_tasks:
     - name: <enter details hear>
 
 # Below are some typical ansible tasks that would be included in a playbook delete or amend as appropriate
   tasks:
-    - name: <enter details hear>
+    - name: "Start multiple services"
+      service: "name= {{ item }} state=started enabled=yes"
+      with_items:
+        - service1
+        - service2
 
     - name: Ensure that a Directory exists
       file:
