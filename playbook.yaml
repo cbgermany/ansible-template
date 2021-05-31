@@ -2,9 +2,14 @@
 - hosts: all
   become: yes
 
+  vars:
+    variable1: value1
+
+# Load variables from a file named vars.yaml
   vars_filea:
   - vars.yml
 
+# handlers only run at the end of the playbook or when called directly
   handlers:
     - name: restart service1
       service: name=service1 state=restarted
@@ -14,6 +19,10 @@
 
 # Below are some typical ansible tasks that would be included in a playbook delete or amend as appropriate
   tasks:
+    - name: Print out value of variable1
+      debug:
+        msg: "The valu od variable1 is {{ variable1 }}"
+
     - name: "Start multiple services"
       service: "name= {{ item }} state=started enabled=yes"
       with_items:
